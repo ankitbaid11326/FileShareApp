@@ -20,7 +20,7 @@ class AppRouter{
 		const app = this.app;
 		const db = app.get('db');
 		const uploadDir = app.get("storageDir");
-		const upload = app.get('upload');
+		const upload = app.upload;
 
 		app.get('/', (req, res, next) => {
 			return res.status(200).json({
