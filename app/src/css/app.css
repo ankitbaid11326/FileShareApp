@@ -1,0 +1,420 @@
+@import "https://fonts.googleapis.com/css?family=Josefin+Sans:400,700";
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+@font-face {
+  font-family: "untitled-font-1";
+  src: url("fonts/untitled-font-1.eot");
+  src: url("fonts/untitled-font-1.eot?#iefix") format("embedded-opentype"), url("fonts/untitled-font-1.woff") format("woff"), url("fonts/untitled-font-1.ttf") format("truetype"), url("fonts/untitled-font-1.svg#untitled-font-1") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+[data-icon]:before {
+  font-family: "untitled-font-1" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "untitled-font-1" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-paper-plane:before {
+  content: "\61"; }
+
+.icon-mouse-pointer:before {
+  content: "\62"; }
+
+.icon-upload-cloud:before {
+  content: "\63"; }
+
+.icon-download:before {
+  content: "\64"; }
+
+.icon-upload:before {
+  content: "\65"; }
+
+.icon-picture-o:before {
+  content: "\66"; }
+
+.icon-paperplane:before {
+  content: "\67"; }
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  background: #2196f3;
+  color: #96a3bb;
+  font-size: 14px; }
+
+a {
+  color: #2196f3; }
+
+* {
+  box-sizing: border-box; }
+
+.app-layout {
+  max-width: 1000px;
+  margin: 0 auto; }
+  @media (min-width: 992px) {
+    .app-layout {
+      padding: 100px 50px 50px 50px; } }
+
+.app-container {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 0 0 0; }
+  .app-container .app-header {
+    padding-bottom: 30px;
+    text-align: center; }
+    .app-container .app-header .app-site-info {
+      color: #FFFFFF; }
+      .app-container .app-header .app-site-info h1 {
+        font-weight: 700;
+        margin: 0px;
+        padding: 0px;
+        font-size: 60px; }
+    .app-container .app-header .site-title {
+      margin: 20px 0 0 0;
+      padding: 0;
+      font-size: 50px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.95); }
+      @media (max-width: 768px) {
+        .app-container .app-header .site-title {
+          display: none; } }
+    .app-container .app-header .site-slogan {
+      margin-top: 20px;
+      padding: 0;
+      font-size: 30px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.75); }
+      @media (max-width: 768px) {
+        .app-container .app-header .site-slogan {
+          display: none; } }
+  @media (min-width: 992px) {
+    .app-container .app-header {
+      float: left;
+      padding-top: 100px;
+      text-align: left; }
+    .app-container .app-content {
+      float: right; } }
+
+.app-card {
+  overflow: hidden;
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 5px; }
+  @media (min-width: 992px) {
+    .app-card {
+      width: 350px; } }
+  .app-card .app-card-header {
+    background: #f3f7ff; }
+    .app-card .app-card-header .app-card-header-inner {
+      padding: 20px; }
+  .app-card .app-card-content .app-card-content-inner {
+    padding: 20px; }
+  .app-card.app-card-uploading .app-card-content .app-card-content-inner, .app-card.app-card-upload-sent .app-card-content .app-card-content-inner {
+    padding: 40px; }
+
+.app-file-select-zone {
+  width: 100%;
+  display: block;
+  text-align: center; }
+  .app-file-select-zone label {
+    display: block;
+    width: 100%; }
+    .app-file-select-zone label input {
+      position: fixed;
+      top: -9999px; }
+  .app-file-select-zone .app-upload-description {
+    display: block;
+    font-size: 12px; }
+  .app-file-select-zone .app-upload-icon {
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 60px;
+    height: 30px;
+    border: 1px dashed #96a3bb;
+    position: relative; }
+    .app-file-select-zone .app-upload-icon i {
+      position: absolute;
+      left: 10px;
+      top: -10px;
+      background: #F3f7ff;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 28px; }
+  .app-file-select-zone.error .app-upload-icon {
+    border-color: #d0152e; }
+
+.app-form-item {
+  margin: 0 0 15px 0; }
+  .app-form-item label {
+    display: block;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0 0 8px 0; }
+  .app-form-item input[type="text"], .app-form-item textarea {
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    outline: 0 none;
+    padding: 8px;
+    border-radius: 3px; }
+    .app-form-item input[type="text"]:focus, .app-form-item input[type="text"] :active, .app-form-item textarea:focus, .app-form-item textarea :active {
+      outline: 0 none; }
+  .app-form-item textarea {
+    min-height: 50px; }
+  .app-form-item.error input {
+    color: #d0152e; }
+
+.app-form-actions .app-button {
+  width: 100%;
+  text-align: center;
+  display: block;
+  padding: 10px 15px;
+  color: #2196f3;
+  border: 1px solid #2196f3;
+  border-radius: 3px;
+  background: #FFF;
+  font-weight: 700;
+  text-transform: uppercase; }
+  .app-form-actions .app-button.primary {
+    background: #2196f3;
+    color: #fff; }
+
+.app-files-selected {
+  max-height: 150px;
+  position: relative;
+  overflow-y: auto;
+  background: #FFFFFF;
+  position: relative;
+  margin: -20px -20px 20px -20px;
+  padding: 20px; }
+  .app-files-selected .app-files-selected-item {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px 0; }
+    .app-files-selected .app-files-selected-item .filename {
+      flex-grow: 1; }
+  .app-files-selected .app-file-remove {
+    border: 0 none;
+    padding: 3px;
+    font-size: 14px;
+    font-weight: 700;
+    background: none;
+    color: rgba(0, 0, 0, 0.6); }
+
+.text-uppercase {
+  text-transform: uppercase; }
+
+.error {
+  color: #d0152e; }
+
+.app-home-uploading-icon {
+  display: block;
+  text-align: center; }
+  .app-home-uploading-icon i {
+    font-size: 60px;
+    display: inline-block;
+    border: 1px solid #96a3bb;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    line-height: 115px; }
+  .app-home-uploading-icon h2 {
+    margin: 20px 0 0 0;
+    padding: 0;
+    font-size: 17px; }
+
+.app-home-upload-sent-icon {
+  display: block;
+  text-align: center; }
+  .app-home-upload-sent-icon i {
+    font-size: 50px;
+    display: inline-block;
+    border: 1px solid #96a3bb;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    line-height: 115px; }
+
+.app-upload-files-total {
+  margin-top: 20px; }
+
+.app-upload-stats {
+  display: flex;
+  flex-direction: row; }
+  .app-upload-stats .app-upload-stats-left {
+    flex-grow: 1; }
+
+.app-progress {
+  background: #f1f8fe;
+  border: 1px solid #b2d8f8;
+  height: 15px;
+  line-height: 15px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0 10px 0;
+  position: relative; }
+  .app-progress .app-progress-bar {
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 15px;
+    line-height: 15px;
+    background: #1976d2; }
+
+.app-upload-cancel-button {
+  margin-top: 50px; }
+
+.app-text-center {
+  text-align: center; }
+
+.app-upload-sent-message h2 {
+  font-size: 26px;
+  margin: 40px 0;
+  padding: 0; }
+.app-upload-sent-message p {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5em; }
+
+.app-upload-sent-action {
+  margin: 20px 0; }
+  .app-upload-sent-action button {
+    margin: 10px 0; }
+
+.app-page-download .app-card {
+  margin: 0 auto; }
+  @media (min-width: 768px) {
+    .app-page-download .app-card {
+      width: 400px; } }
+
+.app-top-header {
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 20px; }
+  .app-top-header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 48px;
+    font-weight: 700; }
+
+.app-download-icon {
+  text-align: center; }
+  .app-download-icon i {
+    font-size: 64px;
+    color: #96a3bb;
+    display: inline-block;
+    border: 1px solid #96a3bb;
+    width: 100px;
+    height: 100px;
+    line-height: 125px;
+    border-radius: 50%; }
+
+.app-download-message {
+  margin-top: 30px; }
+  .app-download-message h2 {
+    font-size: 24px;
+    margin: 20px 0; }
+  .app-download-message ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .app-download-message ul li {
+      margin: 0 10px 0 0;
+      padding: 0 0 0 10px;
+      display: inline-block;
+      position: relative; }
+      .app-download-message ul li:before {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        display: block;
+        content: ' ';
+        width: 4px;
+        height: 4px;
+        background: #96a3bb;
+        border-radius: 50%; }
+      .app-download-message ul li:first-child {
+        padding: 0px; }
+        .app-download-message ul li:first-child:before {
+          display: none; }
+
+.app-download-file-list {
+  margin: 30px 0; }
+  .app-download-file-list .app-download-file-list-item {
+    border-bottom: 1px solid #e3eaf8;
+    padding: 10px 5px;
+    display: flex; }
+    .app-download-file-list .app-download-file-list-item .filename {
+      flex-grow: 1; }
+    .app-download-file-list .app-download-file-list-item .download-action a {
+      color: #2196f3;
+      text-decoration: none; }
+
+.app-download-actions button {
+  margin: 10px 0; }
+
+.app-top-header h1 {
+  cursor: pointer; }
+
+/*# sourceMappingURL=app.css.map */

@@ -1,0 +1,4 @@
+api/node_modules/
+api/storage/
+api/src/mailconfig.js
+app/node_modules/
