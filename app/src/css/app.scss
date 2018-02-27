@@ -167,7 +167,7 @@ a{
         margin: 0 0 8px 0;
     }
 
-    input[type="text"], textarea{
+    input[type="text"], input[type="email"], input[type="password"], textarea{
         width: 100%;
         border: 1px solid rgba(224, 224, 224, 1);
         outline: 0 none;
@@ -441,4 +441,94 @@ a{
     h1{
         cursor: pointer;
     }
+}
+.app-top-bar{
+    color: #FFFFFF;
+    height: $header-height;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    .app-top-bar-inner{
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex; 
+        .app-top-bar-left{
+            flex-grow: 1;
+        }
+        .app-top-bar-right{
+            text-align: right;
+            .app-top-bar-right-inner{
+                display: flex;
+            }
+        }
+    }
+    .site-name{
+        font-size: 30px;
+        line-height: $header-height + 15px;
+        cursor: pointer;
+    }
+    .user-profile-picture{
+        padding-top: 10px;
+        img{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+    }
+    .user-profile-menu{
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        font-weight: 700;
+        li{ 
+            padding: 0 10px 0 10px;
+            line-height: $header-height;
+        }
+    }
+}
+
+.app-login-form{
+    background:#FFFFFF;
+    position: fixed;
+    right: 0;
+    top:0;
+    min-width: 300px;
+    bottom: 0;
+    z-index: 2;
+    .form-title{
+        padding: 20px 0;
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+        display: block;
+    }
+    .app-login-form-inner{
+        position: relative;
+        padding: 40px;
+    }
+    .app-form-actions{
+        button{
+            margin: 10px 0;
+        }
+    }
+    .app-form-description{
+        text-align: center;
+    }
+    .app-dismiss-button{
+        position: absolute;
+        z-index: 3;
+        right: 20px;
+        top: 20px;
+    }
+
+    // .signupButton{
+    //     bottom: 10px;
+    //     position: absolute;
+    //     width: 220px;
+    // }
+}
+.user-signin-button{
+    cursor: pointer;
 }
