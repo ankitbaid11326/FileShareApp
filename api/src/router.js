@@ -7,6 +7,7 @@ import File from './models/file';
 import Post from './models/post';
 import FileArchiver from './archiver';
 import Email from './email';
+import S3 from './s3';
 
 class AppRouter{
 
@@ -108,19 +109,32 @@ class AppRouter{
 					})
 				}
 
-				const filePath = path.join(uploadDir, fileName);
-				// return res.download(filePath, fileName, (err) => {
-				return res.download(filePath, _.get(result, '[0].originalName'), (err) => {
-					if(err){
-						return res.status(404).json({
-							error: {
-								message: "File not found"
-							}
-						});
-					}else{
-						console.log("File not found");
-					}
-				})
+				// ******************** Download file from S3 service ********************
+				const file = _.get(result, '[0]')
+				const downloader = new S3(app, res);
+
+				// ******************** this is from S3 -> ourServer -> client  ********************
+				//return downloader.download(file);
+
+				// ******************** this is directly from S3 Server ********************
+				// // this will be always faster
+				const downloadUrl = downloader.getDownloadURL(file);
+				return res.redirect(downloadUrl);
+
+				// ******************** THis is for local storage ************************
+				// const filePath = path.join(uploadDir, fileName);
+				// // return res.download(filePath, fileName, (err) => {
+				// return res.download(filePath, _.get(result, '[0].originalName'), (err) => {
+				// 	if(err){
+				// 		return res.status(404).json({
+				// 			error: {
+				// 				message: "File not found"
+				// 			}
+				// 		});
+				// 	}else{
+				// 		console.log("File not found");
+				// 	}
+				// })
 			})
 		});
 

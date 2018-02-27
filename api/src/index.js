@@ -65,6 +65,7 @@ app.set('root', __dirname);
 app.set('storageDir', storageDir);
 app.upload = upload;
 app.email = email;
+app.s3 = s3;
 
 connect( (err, client) => {
 	if(err){
