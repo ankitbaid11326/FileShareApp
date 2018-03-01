@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import classNames from 'classnames';
 import _ from 'lodash';
 import {isEmail} from '../helpers/email';
-import {createUser} from '../helpers/user';
+import {createUser, login} from '../helpers/user';
 
 class LoginForm extends Component{
     
@@ -10,6 +10,7 @@ class LoginForm extends Component{
         super(props);
 
         this.state = {
+            message: null,
             isLogin: true,
             user: {
                 name: '',
@@ -123,7 +124,25 @@ class LoginForm extends Component{
             if(isValid){
 
                 if(isLogin){
-                    // login data to request
+
+                    login(this.state.user.email, this.state.user.password).then((response) => {
+                        // login successful
+                        this.setState({
+                            message: {
+                                type: 'success',
+                                message: 'Login Successful'
+                            }
+                        });
+                    }).catch((err) => {
+                        this.setState({
+                            message: {
+                                type: 'error',
+                                message: 'An error while performing login.!'
+                            }
+                        });
+                        console.log(err);
+                    })
+
                 }else{
                     createUser(this.state.user).then((response) => {
                         console.log('hey i got data after send post', response);
@@ -148,7 +167,7 @@ class LoginForm extends Component{
 
     render(){
 
-        const {isLogin, user, error} = this.state;
+        const {isLogin, user, error, message} = this.state;
         const title = isLogin ? 'Sign In' : 'Sign Up';
 
         return(
@@ -161,6 +180,12 @@ class LoginForm extends Component{
                     }} className={'app-dismiss-button'}> Close </button>
                     <h2 className={'form-title'}> {title} </h2>
                     <form onSubmit={this._onSubmit}>
+                        {
+                            message ? <div className={'app-message'}>
+                                <p className={message.type}> {message.message} </p>
+                            </div> : null
+                        }
+
                         {
                             !isLogin ? <div> 
                                 <div className={classNames('app-form-item', {'error': _.get(error, 'name')})}>

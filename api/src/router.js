@@ -191,6 +191,25 @@ class AppRouter{
 			});
 		});
 
+		// Login route
+		app.post('/api/users/login', (req, res, next) => {
+			const body = _.get(req, 'body', {});
+			const user = new User(app);
+			const email = _.get(body, 'email');
+			const password = _.get(body, 'password');
+
+			console.log(email, password);
+
+			user.login(email, password, (err, user) => {
+				if(err){
+					return res.status(401).json({
+						message: 'An error login to your account. Please try again.!'
+					});
+				}
+				return res.status(200).json(user);
+			});
+		});
+
 
 	}
 

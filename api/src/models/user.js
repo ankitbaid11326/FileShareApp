@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import bcrypt from 'bcrypt';
+import Auth from './auth';
 
 const saltRounds = 10;
 
@@ -17,6 +18,52 @@ class User{
         }
 
         this.findUserByEmail = this.findUserByEmail.bind(this);
+        this.login = this.login.bind(this);
+    }
+
+    login(email, password, callback = () => {}){
+        const app = this.app;
+        let error = null;
+        let user = {name: 'A', email: 'test@gmail.com'};
+
+        if(!email || !password){
+            console.log('working in line 30');
+            error = {message: 'Email or Password is required'};
+            return callback(error, null);
+        }
+
+        this.findUserByEmail(email, (err, user) => {
+            console.log('working in line 36');
+            if(err === null && user){
+                const passwordCheck = bcrypt.compareSync(password, user.password);
+                
+                if(passwordCheck){
+                    // create a new JSON web token and return it to user, so user can use it for later requests.
+                    const auth = new Auth(app);
+                    auth.createToken(user, null, (err, token) => {
+
+                        if(err){
+                            error = {message: 'An error login to your account'};
+                            return callback(err, null);
+                        }
+                        
+                        delete user.password;
+                        token.user = user;
+                        return callback(null, token);
+                    })
+
+                }else{
+                    error = {message: 'Password does not match'};
+                    return callback(error, null);
+                }
+            }
+
+            if(err || !user){
+                error = {message: 'An error login to your account'};
+                return callback(error, null);
+            }
+
+        })
     }
 
     initWithObject(obj){

@@ -488,4 +488,12 @@ a {
 .user-signin-button {
   cursor: pointer; }
 
+.app-message p {
+  padding: 10px;
+  border: 1px solid #2196f3;
+  border-radius: 5px;
+  margin: 10px 0; }
+  .app-message p.error {
+    border-color: #d0152e; }
+
 /*# sourceMappingURL=app.css.map */
