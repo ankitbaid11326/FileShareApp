@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import classNames from 'classnames';
 import _ from 'lodash';
 import {isEmail} from '../helpers/email';
+import {createUser} from '../helpers/user';
 
 class LoginForm extends Component{
     
@@ -120,7 +121,15 @@ class LoginForm extends Component{
         this._formValidation(fieldNeedToValidate, (isValid) => {
             
             if(isValid){
-                // send this data to server
+
+                if(isLogin){
+                    // login data to request
+                }else{
+                    createUser(this.state.user).then((response) => {
+                        console.log('hey i got data after send post', response);
+                    });
+                }
+
             }
 
         });

@@ -72,7 +72,7 @@ connect( (err, client) => {
 		console.log("Error connecting to database");
 		throw (err);
 	}
-
+	app.db = client.db(dbName);
 	app.set('db', client.db(dbName));
 
 	// init routers.

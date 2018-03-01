@@ -5,9 +5,11 @@ import {ObjectID} from 'mongodb';
 import {version} from '../package.json';
 import File from './models/file';
 import Post from './models/post';
+import User from './models/user';
 import FileArchiver from './archiver';
 import Email from './email';
 import S3 from './s3';
+
 
 class AppRouter{
 
@@ -165,6 +167,32 @@ class AppRouter{
 				}
 					return res.json({result});
 			});
+		});
+
+		// Create new User post
+		app.post('/api/users/', (req, res, next) => {
+
+			const body = _.get(req, 'body');
+			const user 	= new User(app);
+			user.initWithObject(body).create((err, newUser) => {
+
+				console.log('New user created with error', err, newUser);
+				if(err){
+					return res.status(503).json({
+						error: {
+							message: 'An error creating new user account'
+						}
+					});
+					return res.status(200).json({
+						newUser
+					})
+				}
+
+			});
+
+			res.status(200).json({
+				name: 'Ankit Baid'
+			})
 		});
 
 
