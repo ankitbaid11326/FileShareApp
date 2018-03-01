@@ -180,7 +180,7 @@ class AppRouter{
 				if(err){
 					return res.status(503).json({
 						error: {
-							message: 'An error creating new user account'
+							message: err
 						}
 					});
 					return res.status(200).json({
@@ -189,10 +189,6 @@ class AppRouter{
 				}
 
 			});
-
-			res.status(200).json({
-				name: 'Ankit Baid'
-			})
 		});
 
 

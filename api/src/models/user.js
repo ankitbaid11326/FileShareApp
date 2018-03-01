@@ -1,4 +1,7 @@
 import _ from 'lodash';
+import bcrypt from 'bcrypt';
+
+const saltRounds = 10;
 
 class User{
 
@@ -12,6 +15,8 @@ class User{
             created: new Date(),
             updated: null,
         }
+
+        this.findUserByEmail = this.findUserByEmail.bind(this);
     }
 
     initWithObject(obj){
@@ -21,14 +26,64 @@ class User{
         return this;
     }
 
+    validate(callback = () => {}){
+        let errors = [];
+        const model = this.model;
+        if(model.password.length < 3){
+            errors.push({
+                message: 'password should more then 3 characters long.'
+            })
+        }
+
+
+        this.findUserByEmail(model.email, (err, user) => {
+            console.log('query done');
+            console.log(user);
+            if(err || user){
+                errors.push({message: 'Email is alreay in use.'})
+            }
+            return callback(errors);
+        }); 
+    }
+
+    findUserByEmail(email =  null, callback = () => {}){
+        const db = this.app.db;
+        const query = {
+            email: email
+        };
+        console.log(query);
+
+        db.collection('users').find(query).limit(1).toArray((err, result) => {
+            return callback(err, _.get(result, '[0]', null));
+        });
+    }
+
     create(callback){
 
-        const model = this.model;
+        let model = this.model;
         const db = this.app.db;
 
-        db.collection('users').insertOne(model, (err, result) => {
-            return callback(err, model);
+        const hashPassword = bcrypt.hashSync(model.password, saltRounds);
+        model.password = hashPassword;
+
+        this.validate((errors) => {
+            
+            let messages = [];
+            if(errors.length > 0){
+                
+                _.each(errors, (err) => {
+                    messages.push(err.message);
+                });
+
+                return callback(_.join(messages, ','), null);
+            }
+            db.collection('users').insertOne(model, (err, result) => {
+                return callback(err, model);
+            });
+
         });
+
+        
     }
 
 }
