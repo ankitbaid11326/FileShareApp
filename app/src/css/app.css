@@ -492,8 +492,10 @@ a {
   padding: 10px;
   border: 1px solid #2196f3;
   border-radius: 5px;
-  margin: 10px 0; }
+  margin: 10px 0;
+  color: #2196f3; }
   .app-message p.error {
+    color: #d0152e;
     border-color: #d0152e; }
 
 /*# sourceMappingURL=app.css.map */

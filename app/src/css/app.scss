@@ -543,7 +543,9 @@ a{
         border: 1px solid $primary-color;
         border-radius: 5px;
         margin: 10px 0;
+        color: $primary-color;
         &.error{
+            color: $danger-color;
             border-color: $danger-color;
         }
     }

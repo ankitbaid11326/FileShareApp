@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import bcrypt from 'bcrypt';
 import Auth from './auth';
+import {ObjectID} from 'mongodb';
 
 const saltRounds = 10;
 
@@ -19,6 +20,25 @@ class User{
 
         this.findUserByEmail = this.findUserByEmail.bind(this);
         this.login = this.login.bind(this);
+        this.findById = this.findById.bind(this);
+    }
+
+    findById(id, callback = () => {}){
+        const db = this.app.db;
+        const query = {
+            _id: new ObjectID(id)
+        }
+        db.collection('users').find(query).limit(1).toArray((err, result) => {
+            const user = _.get(result, '[0]');
+            if(err === null && user){
+                
+                delete user.password;
+
+                return callback(null, user);
+            }
+            const error = {message: 'User not found'};
+            return callback(error, null);
+        });
     }
 
     login(email, password, callback = () => {}){

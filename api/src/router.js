@@ -9,6 +9,7 @@ import User from './models/user';
 import FileArchiver from './archiver';
 import Email from './email';
 import S3 from './s3';
+import Auth from './models/auth';
 
 
 class AppRouter{
@@ -210,6 +211,30 @@ class AppRouter{
 			});
 		});
 
+		// Get my profile details
+		app.get('/api/users/:id', (req, res, next) => {
+
+			const auth = new Auth(app);
+			auth.checkAuth(req, (isLoggedIn) => {
+				if(!isLoggedIn){
+					return res.status(401).json({
+						message: 'Unauthorized'
+					});
+				}
+
+				const userId = _.get(req, 'params.id', null);
+
+				const user = new User(app).findById(userId, (err, obj) => {
+					if(err){
+						return res.status(404).json({
+							message: 'user not found.'
+						})
+					}
+					
+					return res.status(200).json(obj);
+				});
+			});
+		});
 
 	}
 

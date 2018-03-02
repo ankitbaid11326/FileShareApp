@@ -1,3 +1,6 @@
+import {ObjectID} from 'mongodb';
+import _ from 'lodash';
+
 class Auth{
 
     constructor(app){
@@ -25,7 +28,28 @@ class Auth{
             return cb(err, model);
 
         });
+    }
 
+    checkAuth(req, callback = () => {}){
+
+        const token = req.get('authorization');
+
+        if(!token){
+            return callback(false);
+        }
+
+        const db = this.app.db;
+
+        const query = {
+            _id: new ObjectID(token)
+        }
+
+        db.collection('tokens').find(query).limit(1).toArray((err, tokenObjects) => {
+            const tokenObj = _.get(tokenObjects, '[]', null);
+            if(err === null && tokenObj){
+                return callback(true);
+            }
+        });
     }
 
 
